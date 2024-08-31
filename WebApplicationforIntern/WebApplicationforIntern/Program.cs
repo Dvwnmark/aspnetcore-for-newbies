@@ -1,7 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using WebApplicationforIntern.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<WebApplicationforInternContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("WebApplicationforInternContext") ?? throw new InvalidOperationException("Connection string 'WebApplicationforInternContext' not found.")));
 
 var app = builder.Build();
 
